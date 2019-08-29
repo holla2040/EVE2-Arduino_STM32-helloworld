@@ -3,7 +3,7 @@
 
 #include "app.h"
 
-SPISettings spiSettings(2000000, MSBFIRST, SPI_MODE0);  
+SPISettings spiSettings(20000000, MSBFIRST, SPI_MODE0);  
 
 char line[50];
 uint16_t FifoWriteLocation;                                                                                                                                                               

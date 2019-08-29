@@ -6,7 +6,7 @@ uint32_t timeoutDim;
 int DotSize = 20;
 char i = '0';
 
-#define USE_RAMDL
+// #define USE_RAMDL
 
 void setup() {
   console.begin(115200);
