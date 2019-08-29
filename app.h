@@ -7,7 +7,7 @@
 
 
 // change these to make your board and display
-#define EVE2_43
+#define EVE2_35
 const uint8_t   PIN_CS                     = PA4;
 const uint8_t   PIN_PDN                    = PA3;
 const uint8_t   PIN_AUDIO                  = PA2;

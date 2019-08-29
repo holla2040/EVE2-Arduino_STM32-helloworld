@@ -2,10 +2,11 @@
 #include "app.h"
 
 uint32_t timeoutBlink;
+uint32_t timeoutDim;
 int DotSize = 20;
 char i = '0';
 
-// #define USE_RAMDL
+#define USE_RAMDL
 
 void setup() {
   console.begin(115200);
@@ -22,11 +23,13 @@ void setup() {
 
   console.println("setup done");
   timeoutBlink = 0;
+  timeoutDim = millis() + 15000;
 }
 
 
 void loop() {
   uint8_t tag = 0;
+  uint32_t start;
   if (millis() > timeoutBlink) {
     digitalWrite(LED_BUILTIN,!digitalRead(LED_BUILTIN));
     timeoutBlink = millis() + 1000;
@@ -47,7 +50,7 @@ void loop() {
     wr32(RAM_DL + 48, VERTEX2II(92, 133, 0, 0));    // place red point
     wr32(RAM_DL + 52, COLOR_RGB(26, 26, 192));       // change colour to blue
     wr32(RAM_DL + 56, TAG(2));                       // Tag the red dot with a touch ID
-    wr32(RAM_DL + 60, VERTEX2II(400, 133, 0, 0));    // place blue point
+    wr32(RAM_DL + 60, VERTEX2II(250, 133, 0, 0));    // place blue point
     wr32(RAM_DL + 64, END());                        // end placing points
     wr32(RAM_DL + 68 , DISPLAY());                   // display the image
     wr8(REG_DLSWAP + RAM_REG, DLSWAP_FRAME);         // swap display lists
@@ -68,7 +71,7 @@ void loop() {
     Send_CMD(VERTEX2II(92, 133, 0, 0));     // place red point
     Send_CMD(COLOR_RGB(26, 26, 192));       // change colour to blue
     Send_CMD(TAG(2));                       // Tag the red dot with a touch ID
-    Send_CMD(VERTEX2II(400, 133, 0, 0));    // place blue point
+    Send_CMD(VERTEX2II(250, 133, 0, 0));    // place blue point
     Send_CMD(END());                         // end placing points
     Send_CMD(COLOR_RGB(255, 255, 255));
     Cmd_Text(10,10,31,0,"helloworld");
@@ -82,6 +85,7 @@ void loop() {
   }
   tag = rd8(REG_TOUCH_TAG + RAM_REG);
   if (tag) {
+    wr8(RAM_REG + REG_PWM_DUTY , 128);
     console.print(millis());
     console.print(" ");
     switch (tag) {
@@ -93,6 +97,10 @@ void loop() {
         break;
     }
     delay(20);
+    timeoutDim = millis() + 15000;
+  }
+  if (millis() > timeoutDim) {
+    wr8(RAM_REG + REG_PWM_DUTY , 2);
   }
 }
 
