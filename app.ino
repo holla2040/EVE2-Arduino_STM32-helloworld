@@ -29,7 +29,6 @@ void setup() {
 
 void loop() {
   uint8_t tag = 0;
-  uint32_t start;
   if (millis() > timeoutBlink) {
     digitalWrite(LED_BUILTIN,!digitalRead(LED_BUILTIN));
     timeoutBlink = millis() + 1000;
@@ -101,6 +100,7 @@ void loop() {
   }
   if (millis() > timeoutDim) {
     wr8(RAM_REG + REG_PWM_DUTY , 2);
+    timeoutDim = millis() + 15000;
   }
 }
 
