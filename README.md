@@ -1,5 +1,5 @@
 # EVE2-helloworld
-Here's my simplest FTDI EVE2 TFT display project for STM32F103 (bluepill).
+Here's my simplest FTDI EVE2 TFT display project for STM32F103 (bluepill) running Roger Clark's [Arduino_STM32](https://github.com/rogerclarkmelbourne/Arduino_STM32) code base. I included my simple command line Makefile to develop without the Arduino IDE. 
 
 I looked over all the 'sample' arduino code and documentation from the following FTDI, Bridgetek, Matrix Orbital, New Haven, Gameduino 2, FT81xmania, riverdi, and rudolphriedel and concluded that Matrix Orbital's [EVE2-School](https://github.com/MatrixOrbital/EVE-School) project was the simplest starting point. 
 
